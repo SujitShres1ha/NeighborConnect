@@ -1,4 +1,5 @@
-
+// Austin
+// 
 
 /**
  * Handles user authentication - Register and Login
