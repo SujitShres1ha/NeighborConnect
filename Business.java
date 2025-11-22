@@ -11,9 +11,9 @@ public class Business {
     private String description;
     
     // TODO: Add constructor
-    
+  
     // TODO: Add getters and setters
-    
+   
     // TODO: Add equals and hashCode methods for comparison
 }
 
