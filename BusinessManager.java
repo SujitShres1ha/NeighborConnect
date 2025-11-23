@@ -6,77 +6,148 @@ import java.util.List;
  * BusinessManager - handles business-related operations
  * Manages viewing, filtering, sorting, and searching businesses
  */
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+/**
+ * BusinessManager - handles business-related operations
+ * Manages viewing, filtering, sorting, and searching businesses
+ */
 public class BusinessManager {
+
     private List<Business> businesses;
-    
-    // TODO: Add constructor to initialize businesses list
-    
+    private Scanner scanner = new Scanner(System.in);
+
+    // --- Constructor to initialize business list ---
+    public BusinessManager(List<Business> businesses) {
+        this.businesses = businesses;
+    }
+
     /**
      * View businesses in a specific location
      */
     public void viewBusinessesInLocation() {
-        // TODO: Implement flow:
         // 1. Select Location
+        Location selectedLocation = selectLocation();
+        if (selectedLocation == null) {
+            System.out.println("Invalid location.");
+            return;
+        }
+
         // 2. Filter Businesses by Location
+        List<Business> filtered = filterBusinessesByLocation(selectedLocation);
+
+        if (filtered.isEmpty()) {
+            System.out.println("No businesses found in this location.");
+            return;
+        }
+
         // 3. Sort Businesses by Ratings
+        filtered = sortBusinessesByRatings(filtered);
+
         // 4. Display Business Info
-        // 5. Save Business? (Yes/No)
+        displayBusinesses(filtered);
+
+        // 5. Save Business
+        System.out.print("Do you want to save a business? (yes/no): ");
+        String choice = scanner.nextLine().trim();
+
+        if (choice.equalsIgnoreCase("yes")) {
+            System.out.print("Enter business name to save: ");
+            String name = scanner.nextLine().trim();
+
+            filtered.stream()
+                .filter(b -> b.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .ifPresentOrElse(
+                    business -> System.out.println("Business saved: " + business.getName()),
+                    () -> System.out.println("Business not found.")
+                );
+        }
     }
-    
+
     /**
      * Search businesses by type
      */
     public void searchBusinessByType() {
-        // TODO: Implement flow:
         // 1. Enter Business Type
+        System.out.print("Enter business type: ");
+        String type = scanner.nextLine().trim();
+
         // 2. Filter Businesses by Type
+        List<Business> filtered = filterBusinessesByType(type);
+
+        if (filtered.isEmpty()) {
+            System.out.println("No businesses found for type: " + type);
+            return;
+        }
+
         // 3. Display Business Info
+        displayBusinesses(filtered);
     }
-    
+
     /**
-     * Select a location
+     * Select a location (simple version)
      */
     public Location selectLocation() {
-        // TODO: Implement location selection
-        return null;
+        System.out.print("Enter city: ");
+        String city = scanner.nextLine().trim();
+
+        System.out.print("Enter state: ");
+        String state = scanner.nextLine().trim();
+
+        if (city.isEmpty() || state.isEmpty()) {
+            return null;
+        }
+
+        return new Location(city, state, "");
     }
-    
+
     /**
      * Filter businesses by location
      */
     public List<Business> filterBusinessesByLocation(Location location) {
-        // TODO: Implement filtering by location
-        return null;
+        return businesses.stream()
+                .filter(b -> b.getLocation().equals(location))
+                .collect(Collectors.toList());
     }
-    
+
     /**
      * Sort businesses by ratings
      */
     public List<Business> sortBusinessesByRatings(List<Business> businesses) {
-        // TODO: Implement sorting by ratings
-        return null;
+        return businesses.stream()
+                .sorted((b1, b2) -> Double.compare(b2.getRating(), b1.getRating()))
+                .collect(Collectors.toList());
     }
-    
+
     /**
      * Filter businesses by type
      */
     public List<Business> filterBusinessesByType(String type) {
-        // TODO: Implement filtering by type
-        return null;
+        return businesses.stream()
+                .filter(b -> b.getType().equalsIgnoreCase(type))
+                .collect(Collectors.toList());
     }
-    
+
     /**
      * Display business information
      */
     public void displayBusinessInfo(Business business) {
-        // TODO: Display business details
+        System.out.println("Name: " + business.getName());
+        System.out.println("Type: " + business.getType());
+        System.out.println("Location: " + business.getLocation());
+        System.out.println("Rating: " + business.getRating());
+        System.out.println("Description: " + business.getDescription());
     }
-    
+
     /**
      * Display all businesses
      */
     public void displayBusinesses(List<Business> businesses) {
-        // TODO: Display list of businesses
+        for (Business business : businesses) {
+            displayBusinessInfo(business);
+        }
     }
 }
-
