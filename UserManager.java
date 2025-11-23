@@ -7,21 +7,26 @@ import java.util.List;
  */
 public class UserManager {
     private List<User> users;
-    
-    // TODO: Add constructor
+    UserManager(List<User> users){
+      this.users = users;
+    }
     
     /**
      * Add a new user
      */
     public void addUser(User user) {
-        // TODO: Implement adding user
+        users.add(user);
     }
     
     /**
      * Find user by username
      */
     public User findUserByUsername(String username) {
-        // TODO: Implement user lookup
+        for (User user: users){
+          if (user.getUsername().equals(username)){
+            return user;
+          }
+        }
         return null;
     }
     
@@ -29,7 +34,11 @@ public class UserManager {
      * Check if username exists
      */
     public boolean usernameExists(String username) {
-        // TODO: Implement username check
+        for (User user: users){
+          if (user.getUsername().equals(username)){
+            return true;
+          }
+        }
         return false;
     }
 }
