@@ -1,47 +1,47 @@
 // Subash
 import java.util.Scanner;
+import java.util.List;
+
 /**
  * Login Menu - Menu displayed after successful login
  * Options: View Businesses in Location, Search Business by Type, Saved Businesses, Logout
  */
 public class LoginMenu {
     private User currentUser;
+    private Scanner sc = new Scanner(System.in);
     
     public LoginMenu(User user) {
         this.currentUser = user;
     }
     
     public void display() {
-        // TODO: Display menu options
-        // 1. View Businesses in Location
-        // 2. Search Business by Type
-        // 3. Saved Businesses
-        // 4. Logout
-        Scanner sc = new Scanner(System.in);
         boolean run = true;
-        System.out.println("======= Welcome to NeighborConnect! ======= \n");
-        System.out.println("-------Support local. Connect local.-------");
-        System.out.println("How would you like to get started?");
+        System.out.println("\n======= Welcome to NeighborConnect! =======");
+        System.out.println("-------Support local. Connect local.-------\n");
+        
         while(run) {
+            System.out.println("How would you like to get started?");
             System.out.println("1. View Businesses in Location");
             System.out.println("2. Search Businesses by Type");
-            System.out.println("3. Display Saved Businesses!");
+            System.out.println("3. Display Saved Businesses");
             System.out.println("4. Logout");
-            System.out.println("Please choose an option: ");
+            System.out.print("Please choose an option: ");
+            
             int choice = sc.nextInt();
-            sc.nextLine();
+            sc.nextLine(); // consume newline
 
             switch(choice) {
                 case 1:
-                    BusinessManager.viewBusinessesInLocation();
+                    BusinessManager.viewBusinessesInLocation(currentUser);
                     break;
                 case 2:
-                    BusinessManager.searchBusinessByType();
+                    BusinessManager.searchBusinessByType(currentUser);
                     break;
                 case 3:
-                    currentUser.getSavedBusinesses();
+                    displaySavedBusinesses();
                     break;
                 case 4:
+                    System.out.println("Logging out...");
                     run = false;
                     break;
                 default:
@@ -50,5 +50,16 @@ public class LoginMenu {
         }
     }
     
-    // TODO: Add methods to handle menu selections
+    private void displaySavedBusinesses() {
+        List<Business> saved = currentUser.getSavedBusinesses();
+        if (saved.isEmpty()) {
+            System.out.println("\nYou have no saved businesses yet.");
+        } else {
+            System.out.println("\n=== YOUR SAVED BUSINESSES ===");
+            for (Business business : saved) {
+                BusinessManager.displayBusinessInfo(business);
+                System.out.println("---");
+            }
+        }
+    }
 }

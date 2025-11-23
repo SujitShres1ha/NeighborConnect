@@ -7,8 +7,9 @@ import java.util.List;
  */
 public class UserManager {
     private List<User> users;
+    
     UserManager(List<User> users){
-      this.users = users;
+        this.users = users;
     }
     
     /**
@@ -23,9 +24,9 @@ public class UserManager {
      */
     public User findUserByUsername(String username) {
         for (User user: users){
-          if (user.getUsername().equals(username)){
-            return user;
-          }
+            if (user.getUsername().equals(username)){
+                return user;
+            }
         }
         return null;
     }
@@ -35,11 +36,17 @@ public class UserManager {
      */
     public boolean usernameExists(String username) {
         for (User user: users){
-          if (user.getUsername().equals(username)){
-            return true;
-          }
+            if (user.getUsername().equals(username)){
+                return true;
+            }
         }
         return false;
     }
+    
+    /**
+     * Get all users
+     */
+    public List<User> getUsers() {
+        return users;
+    }
 }
-

@@ -9,14 +9,14 @@ import java.util.List;
 public class User {
     private String username;
     private String password;
-    private String email;
+    // private String email; 
     private List<Business> savedBusinesses;
     
     // TODO: Add constructor
-    User (String username, String password, String email, List<Business> savedBusinesses){
+    User (String username, String password, List<Business> savedBusinesses){
       this.username = username;
       this.password = password;
-      this.email = email;
+      // this.email = email;
       this.savedBusinesses = savedBusinesses;
     }
     
@@ -28,9 +28,9 @@ public class User {
     String getPassword(){
       return password;
     }
-    String getEmail(){
-      return email;
-    }
+    // String getEmail(){
+    //   return email;
+    // }
 
     //setters
     void setUsername(String username){
@@ -39,9 +39,9 @@ public class User {
     void setPassword(String password){
       this.password = password;
     }
-    void setEmail(String email){
-      this.email = email;
-    }
+    // void setEmail(String email){
+    //   this.email = email;
+    // }
 
     
     // TODO: Add method to validate password
