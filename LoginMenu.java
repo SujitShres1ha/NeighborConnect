@@ -1,5 +1,5 @@
 // Subash
-
+import java.util.Scanner;
 /**
  * Login Menu - Menu displayed after successful login
  * Options: View Businesses in Location, Search Business by Type, Saved Businesses, Logout
@@ -33,13 +33,13 @@ public class LoginMenu {
 
             switch(choice) {
                 case 1:
-                    businessManager.viewBusinessesInLocation();
+                    BusinessManager.viewBusinessesInLocation();
                     break;
                 case 2:
-                    businessManager.searchBusinessByType();
+                    BusinessManager.searchBusinessByType();
                     break;
                 case 3:
-                    currentUser.displayBusinesses();
+                    currentUser.getSavedBusinesses();
                     break;
                 case 4:
                     run = false;

@@ -1,6 +1,7 @@
 // Sanjesh
 
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * BusinessManager - handles business-related operations
@@ -16,8 +17,8 @@ import java.util.stream.Collectors;
  */
 public class BusinessManager {
 
-    private List<Business> businesses;
-    private Scanner scanner = new Scanner(System.in);
+    private static List<Business> businesses;
+    private static Scanner scanner = new Scanner(System.in);
 
     // --- Constructor to initialize business list ---
     public BusinessManager(List<Business> businesses) {
@@ -27,7 +28,7 @@ public class BusinessManager {
     /**
      * View businesses in a specific location
      */
-    public void viewBusinessesInLocation() {
+    public static void viewBusinessesInLocation() {
         // 1. Select Location
         Location selectedLocation = selectLocation();
         if (selectedLocation == null) {
@@ -70,7 +71,7 @@ public class BusinessManager {
     /**
      * Search businesses by type
      */
-    public void searchBusinessByType() {
+    public static void searchBusinessByType() {
         // 1. Enter Business Type
         System.out.print("Enter business type: ");
         String type = scanner.nextLine().trim();
@@ -90,7 +91,7 @@ public class BusinessManager {
     /**
      * Select a location (simple version)
      */
-    public Location selectLocation() {
+    public static Location selectLocation() {
         System.out.print("Enter city: ");
         String city = scanner.nextLine().trim();
 
@@ -107,7 +108,7 @@ public class BusinessManager {
     /**
      * Filter businesses by location
      */
-    public List<Business> filterBusinessesByLocation(Location location) {
+    public static List<Business> filterBusinessesByLocation(Location location) {
         return businesses.stream()
                 .filter(b -> b.getLocation().equals(location))
                 .collect(Collectors.toList());
@@ -116,7 +117,7 @@ public class BusinessManager {
     /**
      * Sort businesses by ratings
      */
-    public List<Business> sortBusinessesByRatings(List<Business> businesses) {
+    public static List<Business> sortBusinessesByRatings(List<Business> businesses) {
         return businesses.stream()
                 .sorted((b1, b2) -> Double.compare(b2.getRating(), b1.getRating()))
                 .collect(Collectors.toList());
@@ -125,7 +126,7 @@ public class BusinessManager {
     /**
      * Filter businesses by type
      */
-    public List<Business> filterBusinessesByType(String type) {
+    public static List<Business> filterBusinessesByType(String type) {
         return businesses.stream()
                 .filter(b -> b.getType().equalsIgnoreCase(type))
                 .collect(Collectors.toList());
@@ -134,7 +135,7 @@ public class BusinessManager {
     /**
      * Display business information
      */
-    public void displayBusinessInfo(Business business) {
+    public static void displayBusinessInfo(Business business) {
         System.out.println("Name: " + business.getName());
         System.out.println("Type: " + business.getType());
         System.out.println("Location: " + business.getLocation());
@@ -145,7 +146,7 @@ public class BusinessManager {
     /**
      * Display all businesses
      */
-    public void displayBusinesses(List<Business> businesses) {
+    public static void displayBusinesses(List<Business> businesses) {
         for (Business business : businesses) {
             displayBusinessInfo(business);
         }
