@@ -49,7 +49,7 @@ public class Business {
     }
 
     public void setRating(double rating) {
-        this.Rating = Rating;
+        this.Rating = rating;
     }
 
     public String getDescription() {
