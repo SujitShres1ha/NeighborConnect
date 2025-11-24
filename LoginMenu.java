@@ -1,6 +1,7 @@
 // Subash
 import java.util.Scanner;
 import java.util.List;
+import java.util.InputMismatchException;
 
 /**
  * Login Menu - Menu displayed after successful login
@@ -18,17 +19,33 @@ public class LoginMenu {
         boolean run = true;
         System.out.println("\n======= Welcome to NeighborConnect! =======");
         System.out.println("-------Support local. Connect local.-------\n");
-        
+        System.out.println("How would you like to get started?");
+        boolean c = false;
+
         while(run) {
-            System.out.println("How would you like to get started?");
-            System.out.println("1. View Businesses in Location");
-            System.out.println("2. Search Businesses by Type");
-            System.out.println("3. Display Saved Businesses");
-            System.out.println("4. Logout");
-            System.out.print("Please choose an option: ");
+            if(c) {
+                System.out.println("\nWhat would you like to do next?");
+            }
             
-            int choice = sc.nextInt();
-            sc.nextLine(); // consume newline
+            int choice = 0;
+            boolean x = true;
+            while (x){
+            try{
+                System.out.println("1. View Businesses in Location");
+                System.out.println("2. Search Businesses by Type");
+                System.out.println("3. Display Saved Businesses");
+                System.out.println("4. Logout");
+                System.out.print("Please choose an option: ");
+                choice = sc.nextInt();
+                sc.nextLine();
+                break;
+            }
+            catch(InputMismatchException e){
+                System.out.println("Invalid choice! Please choose an option.\n");
+                sc.nextLine();
+            }
+            }
+            
 
             switch(choice) {
                 case 1:
@@ -47,6 +64,7 @@ public class LoginMenu {
                 default:
                     System.out.println("Invalid choice! Please choose an option.");
             }
+            c = true;
         }
     }
     

@@ -1,7 +1,7 @@
 // Austin
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.InputMismatchException;
 /**
  * Main Menu - Entry point after Start
  * Options: Register, Login, Exit
@@ -14,18 +14,27 @@ public class MainMenu{
         boolean running = true;
         
         while (running) {
-             System.out.println();
-            System.out.println("+------------------------------------------------+");
-            System.out.println("|              NEIGHBORCONNECT v1.0              |");
-            System.out.println("+------------------------------------------------+");
-            System.out.println("|  1) Register                                   |");
-            System.out.println("|  2) Login                                      |");
-            System.out.println("|  3) Exit                                       |");
-            System.out.println("+------------------------------------------------+");
-            System.out.print("Select an option (1-3): ");
-            
-            int choice = scanner.nextInt();
-            scanner.nextLine(); 
+            int choice = 0;
+            boolean x = true;
+            while (x){
+                try{
+                    System.out.println("+------------------------------------------------+");
+                    System.out.println("|              NEIGHBORCONNECT v1.0              |");
+                    System.out.println("+------------------------------------------------+");
+                    System.out.println("|  1) Register                                   |");
+                    System.out.println("|  2) Login                                      |");
+                    System.out.println("|  3) Exit                                       |");
+                    System.out.println("+------------------------------------------------+");
+                    System.out.print("Select an option (1-3): ");
+                    choice = scanner.nextInt();
+                    scanner.nextLine();
+                    break;
+                }
+                catch(InputMismatchException e){
+                    System.out.println("Invalid choice! Please choose an option.\n");
+                    scanner.nextLine();
+            }
+            }
             
             switch(choice){
                 case 1:
